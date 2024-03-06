@@ -9,10 +9,28 @@ Unit tests are added in the `feature:events` module
 ### Screenshots
 
 Idle state
-![screenshot.png](screenshot.png)
-
-Searching
-![screenshot-2.png](screenshot-2.png)
+<table>
+  <thead>
+    <tr>
+      <td>
+        <b>Idle state</b>
+      </td>
+      <td>
+        <b>Searching state</b>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>
+      <img src="screenshot.png" width="320" />
+    </td>
+    <td>
+      <img src="screenshot-2.png" width="320" />
+    </td>
+  </tr>
+  </tbody>
+</table>
 
 ### Improvements
 
