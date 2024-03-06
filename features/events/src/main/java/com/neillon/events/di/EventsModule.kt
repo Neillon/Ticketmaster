@@ -8,6 +8,7 @@ import com.neillon.events.BuildConfig
 import com.neillon.events.data.datasources.local.EventsDatabase
 import com.neillon.events.data.datasources.local.LocalDateTimeConverter
 import com.neillon.events.domain.usecase.GetAllEventsUseCase
+import com.neillon.events.domain.usecase.SearchEventsUseCase
 import com.neillon.events.ui.viewmodel.EventsViewModel
 import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -28,9 +29,10 @@ val eventsModule = module {
 
     // Domain
     single { GetAllEventsUseCase(get()) }
+    single { SearchEventsUseCase(get()) }
 
     // Presentation
-    viewModel<EventsViewModel> { EventsViewModel(get()) }
+    viewModel<EventsViewModel> { EventsViewModel(get(), get()) }
 }
 
 fun provideRetrofit(): Retrofit {

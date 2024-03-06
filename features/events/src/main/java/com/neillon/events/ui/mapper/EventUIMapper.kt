@@ -12,7 +12,8 @@ fun Event.mapToEventUI() = EventUI(
     date = formatDate(this.date),
     place = this.place,
     city = this.city,
-    state = formatState(this.state)
+    state = formatState(this.state),
+    id = this.remoteId
 )
 
 fun formatState(state: String): String = if (state.contains("_")) {

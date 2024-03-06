@@ -8,5 +8,6 @@ data class Event(
     val date: LocalDate,
     val place: String,
     val city: String,
-    val state: String
+    val state: String,
+    val remoteId: String
 )
