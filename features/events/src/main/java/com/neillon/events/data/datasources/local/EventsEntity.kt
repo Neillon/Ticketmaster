@@ -15,5 +15,6 @@ data class EventsEntity(
     @ColumnInfo("date") val date: LocalDate,
     @ColumnInfo("place") val place: String,
     @ColumnInfo("city") val city: String,
-    @ColumnInfo("state") val state: String
+    @ColumnInfo("state") val state: String,
+    @ColumnInfo("remoteId") val remoteId: String
 )

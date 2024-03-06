@@ -37,6 +37,7 @@ class EventsRepositoryImplTest {
 
         with(eventsDatabase) {
             coEvery { eventsDao().getAll() } returns EventsMockHelper.EVENTS.mapToEntity()
+            coEvery { eventsDao().searchByName(any()) } returns EventsMockHelper.EVENTS.mapToEntity()
         }
 
         repository = EventsRepositoryImpl(connectivityChecker, eventsService, eventsDatabase)
@@ -59,6 +60,15 @@ class EventsRepositoryImplTest {
 
         assertEquals(result, EventsMockHelper.EVENTS)
         coVerify { eventsDatabase.eventsDao().getAll() }
+        coVerify(exactly = 0) { eventsService.getEvents(any()) }
+    }
+
+    @Test
+    fun `When searching, should fetch events from database`() = runTest {
+        val result = repository.searchEvents("anyString")
+
+        assertEquals(result, EventsMockHelper.EVENTS)
+        coVerify { eventsDatabase.eventsDao().searchByName("anyString") }
         coVerify(exactly = 0) { eventsService.getEvents(any()) }
     }
 

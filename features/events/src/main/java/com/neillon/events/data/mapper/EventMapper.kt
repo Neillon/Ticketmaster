@@ -16,7 +16,8 @@ fun EventDto.mapToEvent() = Event(
     date = LocalDate.parse(this.dates.start.localDate),
     place = this.info.venues.first().place,
     city = this.info.venues.first().city.name,
-    state = this.info.venues.first().state.name
+    state = this.info.venues.first().state.name,
+    remoteId = this.id
 )
 
 fun List<EventsEntity>.mapToEvent() = map { it.mapToEvent() }
@@ -26,7 +27,8 @@ fun EventsEntity.mapToEvent() = Event(
     date = this.date,
     place = this.place,
     city = this.city,
-    state = this.state
+    state = this.state,
+    remoteId = this.remoteId
 )
 
 fun List<Event>.mapToEntity() = map { it.mapToEntity() }
@@ -36,6 +38,7 @@ fun Event.mapToEntity() = EventsEntity(
     date = this.date,
     place = this.place,
     city = this.city,
-    state = this.state
+    state = this.state,
+    remoteId = this.remoteId
 )
 

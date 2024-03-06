@@ -2,6 +2,9 @@ package com.neillon.events.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import coil.load
@@ -11,34 +14,28 @@ import com.neillon.events.ui.model.EventUI
 import java.util.Locale
 
 class EventsAdapter : RecyclerView.Adapter<EventsAdapter.EventsViewHolder>() {
+    private val diffCallback = object: DiffUtil.ItemCallback<EventUI>() {
+            override fun areItemsTheSame(oldItem: EventUI, newItem: EventUI): Boolean =
+            oldItem.id == newItem.id
 
-    private var events: List<EventUI> = emptyList()
-    private var filteredEvents: List<EventUI> = emptyList()
+        override fun areContentsTheSame(oldItem: EventUI, newItem: EventUI): Boolean =
+            oldItem == newItem
+    }
+    private var differ: AsyncListDiffer<EventUI> = AsyncListDiffer(this, diffCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventsViewHolder {
         val binding = ItemTicketBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return EventsViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = filteredEvents.size
+    override fun getItemCount(): Int = differ.currentList.size
 
     override fun onBindViewHolder(holder: EventsViewHolder, position: Int) {
-        holder.bind(filteredEvents[position])
+        holder.bind(differ.currentList[position])
     }
 
     fun setEvents(items: List<EventUI>) {
-        events = items
-        filteredEvents = events
-        notifyDataSetChanged()
-    }
-
-    fun filter(query: String) {
-        if (query.isEmpty()) {
-            filteredEvents = events
-        }
-        filteredEvents =
-            events.filter { it.name.lowercase().trim().startsWith(query.lowercase().trim()) }
-        notifyDataSetChanged()
+        differ.submitList(items)
     }
 
     inner class EventsViewHolder(private val binding: ItemTicketBinding) :

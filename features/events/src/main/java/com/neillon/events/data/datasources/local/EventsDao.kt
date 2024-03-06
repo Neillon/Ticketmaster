@@ -12,4 +12,7 @@ interface EventsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg eventsEntity: EventsEntity)
+
+    @Query("SELECT * FROM events WHERE name like '%' || :name || '%'")
+    suspend fun searchByName(name: String): List<EventsEntity>
 }

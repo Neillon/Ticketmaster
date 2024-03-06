@@ -1,6 +1,5 @@
 package com.neillon.tickets.helper
 
-import com.google.gson.annotations.SerializedName
 import com.neillon.events.data.model.EventCityDto
 import com.neillon.events.data.model.EventDateDto
 import com.neillon.events.data.model.EventDto
@@ -35,7 +34,8 @@ object EventsMockHelper {
         date = LocalDate.now(),
         place = "Place",
         city = "City",
-        state = "State"
+        state = "State",
+        remoteId = "remoteId"
     )
 
     val EVENTS: List<Event> = listOf(EVENT, EVENT, EVENT)

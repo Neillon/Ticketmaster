@@ -57,7 +57,7 @@ class EventsFragment : Fragment() {
             }
             return@setOnTouchListener false
         }
-        eventsSearchView.addTextChangedListener { eventsAdapter.filter(it.toString()) }
+        eventsSearchView.addTextChangedListener { eventsViewModel.doAction(EventsViewModel.Action.Search(query = it.toString())) }
     }
 
     private fun setupForDataState(items: List<EventUI>) = with(binding) {

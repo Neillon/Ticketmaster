@@ -23,4 +23,8 @@ class EventsRepositoryImpl(
             eventsDatabase.eventsDao().getAll().mapToEvent()
         }
     }
+
+    override suspend fun searchEvents(name: String): List<Event> {
+        return eventsDatabase.eventsDao().searchByName(name).mapToEvent()
+    }
 }
